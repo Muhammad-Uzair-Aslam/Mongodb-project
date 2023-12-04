@@ -13,8 +13,30 @@ const fetchProducts=async()=>{
     console.log("error",error)
   }
 }
-const deleteHandler=()=>{
-
+const deleteHandler=async()=>{
+  try {
+    var myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+  
+  var raw = JSON.stringify({
+    "id": props.id
+  });
+  
+  var requestOptions = {
+    method: 'DELETE',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
+  };
+  
+  const resp=await fetch("http://localhost:3000/api/products", requestOptions)
+  console.log(resp)
+  return resp
+  } catch (error) {
+    console.log("error",error)
+  }
+  
+    
 }
 
 export default async function Products() {
@@ -39,12 +61,12 @@ export default async function Products() {
       <tbody>
         {data?.map((item, index) => (
           <tr key={index}>
-            <td>{item.id}</td>
+            <td>{item._id}</td>
             <td>{item.title}</td>
             <td>{item.description}</td>
             <td>{item.price}</td>
-            <td><Modal title="Update" isUpdate={true} product={item}/></td>
-            <td><Button title="Delete" click={deleteHandler()}/></td>
+            <td><Modal title="Update" isUpdate={true} products={item}/></td>
+            <td><Button id={item._id} title="Delete" /></td>
             {/* Add more table data cells as needed */}
           </tr>
         ))}

@@ -1,17 +1,18 @@
 import { useState } from 'react';
 import styles from '../../styles/products.module.css'
-const ProductModal = ({ isOpen, onClose,isUpdate,product }) => {
+import { NextResponse } from 'next/server';
+const ProductModal = ({ isOpen, onClose,isUpdate,products={} }) => {
   const [productDescription, setProductDescription] = useState('');
   const [formData,setFormData]=useState({
-    title:productDescription.title||'',
-    description:productDescription.description||'',
-    price:productDescription.price||0
+    title:products.title||'',
+    description:products.description||'',
+    price:products.price||0
   })
   const [loading,setLoading]=useState(false)
   const handleSubmit = (e) => {
     e.preventDefault();
     if(isUpdate){
-
+      updateProductApi()
     }
     else{
       PostProductApi()
@@ -55,6 +56,29 @@ setFormData({title:"",description:"",price:0})
   }
   finally{
     setLoading(false)
+  }
+}
+const updateProductApi=async()=>{
+  try {
+    var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+
+var raw = JSON.stringify({
+  "id": products._id,
+  ...formData
+});
+
+var requestOptions = {
+  method: 'PUT',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+await fetch("http://localhost:3000/api/products", requestOptions)
+  alert("Products Updated")
+} catch (error) {
+    alert("error",error)
   }
 }
  
