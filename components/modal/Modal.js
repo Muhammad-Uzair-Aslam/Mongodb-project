@@ -20,7 +20,7 @@ const handleFormSubmit=(formData)=>{
   return (
     <div>
       <button  onClick={openModal}>{props.title}</button>
-      {isModalOpen&&<ProductModal  onClose={closeModal} onSubmit={handleFormSubmit}/>}
+      {isModalOpen&&<ProductModal isUpdate={props.isUpdate} onClose={closeModal} onSubmit={handleFormSubmit}/>}
     </div>
   );
 };

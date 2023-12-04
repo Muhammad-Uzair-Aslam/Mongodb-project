@@ -6,4 +6,4 @@ const userSchema=new Schema({
     email:{type:String,required:true},
     phone:String
 })
-export let userModel=mongoose.models?.profiles ||mongoose.model('profiles',userSchema)
+export const userModel=mongoose.models?.profiles ||mongoose.model('profiles',userSchema)

@@ -3,6 +3,6 @@ const {Schema} =mongoose;
 const productSchema=new Schema({
     title:{ type: String,required:true},
     description:{type:String,required:true},
-    price:Int
+    price:Number
 })
-export let productModel=mongoose.models?.products ||mongoose.model('products',productSchema)
+export const productModel=mongoose.models?.products ||mongoose.model('products',productSchema)
