@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styles from '../../styles/products.module.css'
 import { NextResponse } from 'next/server';
 const ProductModal = ({ isOpen, onClose,isUpdate,products={} }) => {
-  const [productDescription, setProductDescription] = useState('');
+  
   const [formData,setFormData]=useState({
     title:products.title||'',
     description:products.description||'',
